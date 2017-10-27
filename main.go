@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	jeopordyBucket = "questions"
+	jeopardyBucket = "questions"
 )
 
 // Question defines Jeopardy questions
@@ -59,7 +59,7 @@ func loadJeopardyFromFile() []Question {
 func saveQuestions(db *bolt.DB, questions []Question) {
 	i := 0
 	err := db.Update(func(tx *bolt.Tx) error {
-		b, err := tx.CreateBucketIfNotExists([]byte(jeopordyBucket))
+		b, err := tx.CreateBucketIfNotExists([]byte(jeopardyBucket))
 		if err != nil {
 			return fmt.Errorf("could not create questions bucket")
 		}
@@ -86,7 +86,7 @@ func saveQuestions(db *bolt.DB, questions []Question) {
 
 func printQuestionByKey(db *bolt.DB, n int) {
 	err := db.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket([]byte(jeopordyBucket))
+		b := tx.Bucket([]byte(jeopardyBucket))
 		v := b.Get([]byte(itob(n)))
 		fmt.Printf("Question from DB: %s\n", v)
 		return nil
